@@ -1,7 +1,9 @@
 # TBSnakesAndLadders
 My solution to a Snakes and Ladders Game.
 
-Included Play-by-Play
+Includes Play-by-Play, Player Names, and Die Size.
+
+Full Game Sim.
 
 runs in Xcode or commandline.
 
