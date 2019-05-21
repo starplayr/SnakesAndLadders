@@ -18,9 +18,9 @@ import Foundation
 //Here we need to have a Random function that it supports
 func rollDie(_ min: Int, _ max: Int) -> Int {
     #if os(Linux)
-        return Int(random() % max) + min //Linux only
+    return Int(random() % max) + min //Linux only
     #else
-        return Int.random(in: min...max) //Swift 5 for macOS and iOS
+    return Int.random(in: min...max) //Swift 5 for macOS and iOS
     #endif
 }
 
@@ -116,9 +116,14 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
             
             //Update player position with new roll
             let roll = rollDie(die_min, die_max)
+            
+            if let cp = PlayerDict[current_player] {
+                print("\(cp.name) rolls \(roll),")
+            }
+            
             PlayerDict[current_player]?.position += roll
             
-            
+            var square99 = false
             if let position = PlayerDict[current_player]?.position {
                 
                 //if >100 move the player back, we are expecting a perfect roll
@@ -132,7 +137,8 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
                     PlayerDict[current_player]?.position -= roll
                     
                     if let currentPlayer = PlayerDict[current_player] {
-                        print("\(currentPlayer.name)'s roll landed past 100,\r\nmoves back to previous spot: \(currentPlayer.position).")
+                        print("\(currentPlayer.name)'s roll lands past 100,\r\nmoves back to previous spot: \(currentPlayer.position).")
+                        square99 = true
                     }
                 }
                 
@@ -140,11 +146,11 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
                 //the player landed on a ladder base (yay!)
                 if let ladder_destination = LaddersDict[position] {
                     
-                    if let currentPlayer = PlayerDict[current_player] {
-                        print("\(currentPlayer.name) moves to square \(currentPlayer.position),")
+                    if let currentPlayer = PlayerDict[current_player]{
+                        print("moves to square \(currentPlayer.position),")
                     }
                     
-                    print("landed on a ladder,")
+                    print("lands on a ladder,")
                     
                     PlayerDict[current_player]?.ladders += increment
                     PlayerDict[current_player]?.position = ladder_destination
@@ -157,21 +163,21 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
                 } else if let snake_destination = SnakesDict[position] {
                     
                     if let currentPlayer = PlayerDict[current_player] {
-                        print("\(currentPlayer.name) moves to square \(currentPlayer.position),")
+                        print("moves to square \(currentPlayer.position),")
                     }
                     
                     
                     print("gets bit by a snake,")
-
+                    
                     PlayerDict[current_player]?.snakes += increment
                     PlayerDict[current_player]?.position = snake_destination
                     
                     if let currentPlayer = PlayerDict[current_player] {
                         print("slides down to \(currentPlayer.position).")
                     }
-                } else {
+                } else if !square99 {
                     if let currentPlayer = PlayerDict[current_player] {
-                        print("\(currentPlayer.name) moves to square \(currentPlayer.position).")
+                        print("moves to square \(currentPlayer.position).")
                     }
                 }
             }
@@ -205,7 +211,7 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
     if let wp = PlayerDict[winningPlayer] { //, let lp = PlayerDict[losingPlayer] {
         print("After \(turn_counter) turns: \(wp.name) wins!")
     }
-
+    
     
     print(divider)
     
