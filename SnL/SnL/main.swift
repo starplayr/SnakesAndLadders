@@ -11,7 +11,8 @@ import Foundation
 
 /// Takeaways: the player who reaches the most ladders and least amount of snakes usually wins.
 /// The game loop displays a very accurate game simulation. The winner must finish the game with a perfect roll.
-/// Oddity, when this code is run in Playgrounds, its turn_counter is not accurate. When run in Xcode or command line, it displays currently
+/// Oddity, when this code is run in Playgrounds, its turn_counter is not accurate.
+/// When run in Xcode or command line, it displays currently
 /// This code should runs on Mac as well as Linux. Requirements Swift 5
 
 //Here we need to have a Random function that it supports
@@ -29,13 +30,13 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
     let divider = "-----------------------------------------"
     // protect against a single sided die
     guard die_max > 1 else {
-        print("Sorry, a single sided die cannot used in this game.\r\nIt causes an infinite loop to occur and is not alloId.")
+        print("Sorry, a single sided die cannot used in this game.\r\nIt causes an infinite loop to occur and is not allowed.")
         return
     }
     
     // protect against a die greater than 64
     guard die_max <= 64 else {
-        print("Sorry, a die larger than 64 is not alloId.")
+        print("Sorry, a die larger than 64 is not allowed.")
         return
     }
     
@@ -72,7 +73,7 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
     let start_position  = 1
     let finish_position = 100
     
-    /// This lets up reuse our stats for other areas in our app and I only need to define it once.
+    /// This lets up reuse our stats for other areas in our app and we only need to define it once.
     typealias stats = (name:String, position:Int,snakes:Int,ladders:Int)
     
     var PlayerDict = [Int:(stats)]()
@@ -120,7 +121,7 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
             
             if let position = PlayerDict[current_player]?.position {
                 
-                //if >100 move the player back, I are expecting a perfect roll
+                //if >100 move the player back, we are expecting a perfect roll
                 if position > finish_position {
                     
                     /// Reverts the player's position
