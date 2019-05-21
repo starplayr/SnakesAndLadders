@@ -102,14 +102,14 @@ func snakesAndLadders(die_max: Int = 6, player1_name: String = "Ricky", player2_
     
     /// In this loop, I cut it down it to as few operations as possible (for scalability over time)
     /// Also keep the code as readable as possible that is in the loop
-    /// Game Loop: Play unitl we have an absolute winner! First 1 to square 100 wins. Winner must have a perfect roll.
+    /// Game Loop: Play until we have an absolute winner! First 1 to square 100 wins. Winner must have a perfect roll.
     while PlayerDict[1]?.position ?? 1 < finish_position &&
         PlayerDict[2]?.position ?? 1 < finish_position {
             
             print(divider)
             turn_counter += increment
             
-            //alternates betIen player 1 and player 2
+            //alternates between player 1 and player 2
             player1_turn = !player1_turn
             
             current_player = player1_turn ? 1 : 2
