@@ -18,9 +18,9 @@ import Foundation
 //Here we need to have a Random function that it supports
 func rollDie(_ min: Int, _ max: Int) -> Int {
     #if os(Linux)
-    return Int(random() % max) + min //Linux only
+        return Int(random() % max) + min //Linux only
     #else
-    return Int.random(in: min...max) //Swift 5 for macOS and iOS
+        return Int.random(in: min...max) //Swift 5 for macOS and iOS
     #endif
 }
 
